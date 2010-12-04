@@ -1,0 +1,10 @@
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+README
+dist.ini
+lib/Pod/Weaver/Section/ClassMopper.pm
+t/inc/Tester.pm
+t/main.t
+t/weaver.ini
