@@ -22,4 +22,4 @@ requires:
   Pod::Elemental::Element::Pod5::Command: 0
   Pod::Elemental::Element::Pod5::Ordinary: 0
   Pod::Weaver::Role::Section: 0
-version: 1.103380
+version: 1.103400
