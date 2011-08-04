@@ -4,7 +4,7 @@ use warnings;
 
 
 
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.30;
 
 
 
@@ -18,20 +18,22 @@ my %WriteMakefileArgs = (
     'Test::More' => '0'
   },
   'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31'
+    'ExtUtils::MakeMaker' => '6.30'
   },
   'DISTNAME' => 'Pod-Weaver-Section-ClassMopper',
   'EXE_FILES' => [],
   'LICENSE' => 'perl',
   'NAME' => 'Pod::Weaver::Section::ClassMopper',
   'PREREQ_PM' => {
+    'List::Util' => '0',
     'Moose' => '0',
+    'Moose::Util::TypeConstraints' => '0',
     'Pod::Elemental::Element::Nested' => '0',
     'Pod::Elemental::Element::Pod5::Command' => '0',
     'Pod::Elemental::Element::Pod5::Ordinary' => '0',
     'Pod::Weaver::Role::Section' => '0'
   },
-  'VERSION' => '1.110770',
+  'VERSION' => '1.112160',
   'test' => {
     'TESTS' => 't/*.t'
   }
