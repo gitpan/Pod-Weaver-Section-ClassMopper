@@ -33,7 +33,7 @@ my %WriteMakefileArgs = (
     'Pod::Elemental::Element::Pod5::Ordinary' => '0',
     'Pod::Weaver::Role::Section' => '0'
   },
-  'VERSION' => '1.112160',
+  'VERSION' => '1.112162',
   'test' => {
     'TESTS' => 't/*.t'
   }
