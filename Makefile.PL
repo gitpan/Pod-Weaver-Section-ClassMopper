@@ -25,6 +25,7 @@ my %WriteMakefileArgs = (
   'LICENSE' => 'perl',
   'NAME' => 'Pod::Weaver::Section::ClassMopper',
   'PREREQ_PM' => {
+    'Class::Load' => '0',
     'List::Util' => '0',
     'Moose' => '0',
     'Moose::Util::TypeConstraints' => '0',
@@ -33,7 +34,7 @@ my %WriteMakefileArgs = (
     'Pod::Elemental::Element::Pod5::Ordinary' => '0',
     'Pod::Weaver::Role::Section' => '0'
   },
-  'VERSION' => '1.112250',
+  'VERSION' => '1.120100',
   'test' => {
     'TESTS' => 't/*.t'
   }

@@ -17,6 +17,7 @@ meta-spec:
   version: 1.4
 name: Pod-Weaver-Section-ClassMopper
 requires:
+  Class::Load: 0
   List::Util: 0
   Moose: 0
   Moose::Util::TypeConstraints: 0
@@ -24,4 +25,4 @@ requires:
   Pod::Elemental::Element::Pod5::Command: 0
   Pod::Elemental::Element::Pod5::Ordinary: 0
   Pod::Weaver::Role::Section: 0
-version: 1.112250
+version: 1.120100

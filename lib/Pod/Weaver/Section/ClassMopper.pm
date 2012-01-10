@@ -1,12 +1,13 @@
 package Pod::Weaver::Section::ClassMopper;
 use Moose;
 use Moose::Util::TypeConstraints;
+use Class::Load ':all';
 use Pod::Elemental::Element::Pod5::Command;
 use Pod::Elemental::Element::Pod5::Ordinary;
 use Pod::Elemental::Element::Nested;
 use List::Util qw(first);
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # ABSTRACT: Generate some stuff via introspection
 
@@ -29,18 +30,11 @@ has 'skip_method_list' => (
    is => 'ro', 
    isa => 'Pod::Weaver::Section::ClassMopper::MethodListType',
    coerce => 1,
-   default => sub { [qw(
-      meta
-      BUILDARGS
-      BUILDALL 
-      DEMOLISHALL 
-      does 
-      DOES 
-      dump 
-      can
-      VERSION
-      DESTROY 
-   )]}
+   default => sub { 
+      my @list = Moose::Object->meta->get_all_method_names;
+      push @list, 'can';
+      return \@list;
+   }
 );
 
 
@@ -145,7 +139,7 @@ sub _build_method_paragraph {
 
    unless( $self->no_tagline ) { 
       push @$bits, Pod::Elemental::Element::Pod5::Ordinary->new({ 
-         content => 'This documentation was automaticaly generated.'
+         content => 'This documentation was automatically generated.'
       });
    }
 
@@ -244,7 +238,8 @@ sub _get_classname {
       # Shamelessly stolen from Pod::Weaver::Section::Name.  Thanks rjbs!
       ($classname) = $ppi->serialize =~ /^\s*#+\s*PODNAME:\s*(.+)$/m;
    }
-   Class::MOP::load_class( $classname );  # So the meta has .. something.
+   load_class( $classname );
+#   Class::MOP::load_class( $classname );  # So the meta has .. something.
    my $meta = Class::MOP::Class->initialize( $classname );
    $self->_class( $meta );
    return $classname;
@@ -341,27 +336,34 @@ generating your list.  Most of them are from UNIVERSAL or L<Moose::Object>.
 If you'd like to adjust this list, provide the B<complete> list (that is, 
 include the things below, and then some) here, as an arrayref.
 
-The default list of methods skipped is:
+The default list of methods skipped is derived from L<Moose::Object>'s list
+of methods.  At teh time of writing, that list is:
 
 =over 4
 
-=item BUILDARGS
-
-=item BUILDALL
+=item dump
 
 =item DEMOLISHALL
 
+=item meta
+
 =item does
 
-=item DOES
+=item new
 
-=item dump
+=item DESTROY
+
+=item BUILDALL
 
 =item can
 
+=item BUILDARGS
+
+=item isa
+
 =item VERSION
 
-=item DESTROY
+=item DOES
 
 =back
 
