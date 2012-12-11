@@ -91,7 +91,7 @@ sub _build_attributes {
    my $meta = $self->_class;
    return unless ref $meta;
    return if $meta->isa('Moose::Meta::Role');
-   my @attributes = $meta->get_all_attributes;
+   my @attributes = sort $meta->get_all_attributes;
    if( @attributes ) { 
       my @chunks = map { $self->_build_attribute_paragraph( $_ ) } @attributes;
       $self->_attrs( \@chunks );
@@ -103,10 +103,10 @@ sub _build_methods {
    my $meta = $self->_class;
    return unless ref $meta;
    return if $meta->isa('Moose::Meta::Role');
-   my @methods = $meta->get_all_methods;
+   my @methods = sort $meta->get_all_methods;
 
    if( @methods ) { 
-      my @chunks = map { $self->_build_method_paragraph( $_ ) } @methods;
+      my @chunks =  map { $self->_build_method_paragraph( $_ ) } @methods;
       $self->_methods( \@chunks );
    }
 }
@@ -337,7 +337,7 @@ If you'd like to adjust this list, provide the B<complete> list (that is,
 include the things below, and then some) here, as an arrayref.
 
 The default list of methods skipped is derived from L<Moose::Object>'s list
-of methods.  At teh time of writing, that list is:
+of methods.  At the time of writing, that list is:
 
 =over 4
 
